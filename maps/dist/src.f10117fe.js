@@ -85165,17 +85165,37 @@ Object.defineProperty(exports, "__esModule", {
 var CustomMap =
 /** @class */
 function () {
-  function CustomMap(lat, lng, divId) {
-    this.lat = lat;
-    this.lng = lng;
+  function CustomMap(divId) {
     this.googleMap = new google.maps.Map(document.getElementById(divId), {
-      zoom: 5,
+      zoom: 1,
       center: {
-        lat: this.lat,
-        lng: this.lng
+        lat: 0,
+        lng: 0
       }
     });
-  }
+  } // Bad Solution
+
+  /*addMarker(mappable: User | Company): void {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
+      }
+    });
+  } */
+  // Good Solution
+
+
+  CustomMap.prototype.addMarker = function (mappable) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
+      }
+    });
+  };
 
   return CustomMap;
 }();
@@ -85198,7 +85218,9 @@ var user = new User_1.User();
 console.log(user);
 var company = new Company_1.Company();
 console.log(company);
-var map = new CustomMap_1.CustomMap(company.location.lat, company.location.lng, 'map');
+var map = new CustomMap_1.CustomMap('map');
+map.addMarker(user);
+map.addMarker(company);
 },{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
