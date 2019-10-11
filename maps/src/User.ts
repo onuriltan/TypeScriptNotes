@@ -1,6 +1,8 @@
 import faker from 'faker';
+import { Marker } from './CustomMap';
 
-export class User {
+export class User implements Marker {
+  color: string = 'red';
   name: string;
   location: {
     lat: number;
@@ -13,5 +15,9 @@ export class User {
       lat: parseFloat(faker.address.latitude()),
       lng: parseFloat(faker.address.longitude())
     };
+  }
+
+  markerContent() {
+    return `User name is ${this.name}`;
   }
 }

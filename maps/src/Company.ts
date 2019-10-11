@@ -1,6 +1,8 @@
 import faker from 'faker';
+import { Marker } from './CustomMap';
 
-export class Company {
+export class Company implements Marker {
+  color: string = 'blue';
   name: string;
   catchPrase: string;
   location: {
@@ -15,5 +17,13 @@ export class Company {
       lat: parseFloat(faker.address.latitude()),
       lng: parseFloat(faker.address.longitude())
     };
+  }
+  markerContent() {
+    return `
+      <div>
+        <h1> Company name: ${this.name} </h1>
+        <h3> CatchPhrase: ${this.catchPrase} </h3>
+      </div>
+   `;
   }
 }
