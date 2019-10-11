@@ -6,5 +6,15 @@
 
 ## DONT'S
 
-- **Do not use Union Types and Operators** i.e `input: number[] | string` because typescript compiler will suggest array and string methods for the input value
-  which should be avoided
+1. **Avoid using Union Types and Operators** i.e `input: number[] | string` because typescript compiler will suggest array and string methods for the input value which should be avoided
+
+- If you need to use unions then use type guards
+  ```
+  let input: number[] | string
+  if(input instanceof Array) {
+    input.map(...)
+  }
+  if(typeof this.collection === 'string') {
+    input.charAt(...)
+  }
+  ```
