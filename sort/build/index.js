@@ -4,3 +4,7 @@ var sorter_1 = require("./sorter");
 var badSorter = new sorter_1.BadSort([10, 3, -5, 0]);
 badSorter.sortWithBubble();
 console.log(badSorter.collection);
+var collection = new sorter_1.NumbersCollection([10, 3, -5, 0]);
+var goodSorter = new sorter_1.GoodSort(collection);
+goodSorter.sortWithBubble();
+console.log(collection.data);

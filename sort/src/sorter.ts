@@ -19,37 +19,34 @@ export class BadSort {
 }
 
 export class GoodSort {
-  constructor(public collection: ) {}
+  constructor(public collection: NumbersCollection) {}
 
   sortWithBubble(): void {
     const { length } = this.collection;
     for (let i = 0; i < length; i++) {
       for (let j = 0; j < length - i - 1; j++) {
-        if (this.collection[j] > this.collection[j + 1]) {
-          const leftHand = this.collection[j];
-          this.collection[j] = this.collection[j + 1];
-          this.collection[j + 1] = leftHand;
+        if (this.collection.compare(j, j + 1)) {
+          this.collection.swap(j, j + 1);
         }
       }
     }
   }
 }
 
-class NumbersCollection {
-  constructor(public numbersToBeSorted: number[]){
+export class NumbersCollection {
+  constructor(public data: number[]) {}
 
+  get length(): number {
+    return this.data.length;
   }
 
   compare(leftIndex: number, rightIndex: number): boolean {
-    return this.numbersToBeSorted[leftIndex] > this.numbersToBeSorted[rightIndex]
+    return this.data[leftIndex] > this.data[rightIndex];
   }
 
-  swap(leftIndex: number, rightIndex: number): void{
-    const leftHand = this.numbersToBeSorted[leftIndex]
-    this.numbersToBeSorted[leftIndex] = this.numbersToBeSorted[rightIndex];
-    this.numbersToBeSorted[rightIndex] = leftHand;
-
+  swap(leftIndex: number, rightIndex: number): void {
+    const leftHand = this.data[leftIndex];
+    this.data[leftIndex] = this.data[rightIndex];
+    this.data[rightIndex] = leftHand;
   }
-
-
 }

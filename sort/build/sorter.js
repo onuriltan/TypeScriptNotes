@@ -30,10 +30,8 @@ var GoodSort = /** @class */ (function () {
         var length = this.collection.length;
         for (var i = 0; i < length; i++) {
             for (var j = 0; j < length - i - 1; j++) {
-                if (this.collection[j] > this.collection[j + 1]) {
-                    var leftHand = this.collection[j];
-                    this.collection[j] = this.collection[j + 1];
-                    this.collection[j + 1] = leftHand;
+                if (this.collection.compare(j, j + 1)) {
+                    this.collection.swap(j, j + 1);
                 }
             }
         }
@@ -42,16 +40,24 @@ var GoodSort = /** @class */ (function () {
 }());
 exports.GoodSort = GoodSort;
 var NumbersCollection = /** @class */ (function () {
-    function NumbersCollection(numbersToBeSorted) {
-        this.numbersToBeSorted = numbersToBeSorted;
+    function NumbersCollection(data) {
+        this.data = data;
     }
+    Object.defineProperty(NumbersCollection.prototype, "length", {
+        get: function () {
+            return this.data.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
     NumbersCollection.prototype.compare = function (leftIndex, rightIndex) {
-        return this.numbersToBeSorted[leftIndex] > this.numbersToBeSorted[rightIndex];
+        return this.data[leftIndex] > this.data[rightIndex];
     };
     NumbersCollection.prototype.swap = function (leftIndex, rightIndex) {
-        var leftHand = this.numbersToBeSorted[leftIndex];
-        this.numbersToBeSorted[leftIndex] = this.numbersToBeSorted[rightIndex];
-        this.numbersToBeSorted[rightIndex] = leftHand;
+        var leftHand = this.data[leftIndex];
+        this.data[leftIndex] = this.data[rightIndex];
+        this.data[rightIndex] = leftHand;
     };
     return NumbersCollection;
 }());
+exports.NumbersCollection = NumbersCollection;
