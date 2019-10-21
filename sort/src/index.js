@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var bad_sort_1 = require("./bad-sort");
+var good_sort_1 = require("./good-sort");
+var badSorter = new bad_sort_1.BadSort([10, 3, -5, 0]);
+badSorter.sortWithBubble();
+console.log(badSorter.collection);
+var collection = new good_sort_1.NumbersCollection([10, 3, -5, 0]);
+var goodSorter = new good_sort_1.GoodSort(collection);
+goodSorter.sortWithBubble();
+console.log(collection.data);
